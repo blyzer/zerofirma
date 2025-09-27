@@ -1,0 +1,12 @@
+{
+  "name": "zkproof-circuits",
+  "version": "1.0.0",
+  "description": "Circom circuits and SnarkJS tooling for Digito ZK proofs",
+  "scripts": {
+    "compile": "circom circuit/proof.circom --r1cs --wasm --sym --c",
+    "setup": "npm install -g snarkjs"
+  },
+  "dependencies": {
+    "snarkjs": "^0.6.11"
+  }
+}

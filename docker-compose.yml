@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  softHSM:
+    image: quay.io/pkcs11/softhsm:latest
+    environment:
+      - SOFTHSM2_CONF=/etc/softhsm2.conf
+    volumes:
+      - ./softhsm:/var/lib/softhsm
+
+  ipfs:
+    image: ipfs/go-ipfs:latest
+    ports:
+      - "5001:5001"
+
+  ca:
+    build: ./ca-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - softHSM
+
+  validator:
+    build: ./validator
+    ports:
+      - "8081:8081"
+
+  storage:
+    build: ./storage
+    ports:
+      - "9090:9090"
